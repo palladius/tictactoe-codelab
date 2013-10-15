@@ -1,0 +1,161 @@
+{
+ "kind": "discovery#restDescription",
+ "etag": "\"a3GBuXuTtUYW9BV1SIieU5LiL7w/lxD3uy5Mcjk99n-J7qktANO6M7k\"",
+ "discoveryVersion": "v1",
+ "id": "tictactoe:v1",
+ "name": "tictactoe",
+ "version": "v1",
+ "description": "This is an API",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rest",
+ "baseUrl": "https://tictactoe-java.appspot.com/_ah/api/tictactoe/v1/",
+ "basePath": "/_ah/api/tictactoe/v1/",
+ "rootUrl": "https://tictactoe-java.appspot.com/_ah/api/",
+ "servicePath": "tictactoe/v1/",
+ "batchPath": "batch",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "schemas": {
+  "Board": {
+   "id": "Board",
+   "type": "object",
+   "properties": {
+    "state": {
+     "type": "string"
+    }
+   }
+  },
+  "Score": {
+   "id": "Score",
+   "type": "object",
+   "properties": {
+    "encodedKey": {
+     "type": "string"
+    },
+    "outcome": {
+     "type": "string"
+    },
+    "played": {
+     "type": "string",
+     "format": "date-time"
+    }
+   }
+  },
+  "ScoreCollection": {
+   "id": "ScoreCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Score"
+     }
+    }
+   }
+  }
+ },
+ "resources": {
+  "board": {
+   "methods": {
+    "getmove": {
+     "id": "tictactoe.board.getmove",
+     "path": "board",
+     "httpMethod": "POST",
+     "request": {
+      "$ref": "Board"
+     },
+     "response": {
+      "$ref": "Board"
+     }
+    }
+   }
+  },
+  "scores": {
+   "methods": {
+    "get": {
+     "id": "tictactoe.scores.get",
+     "path": "score/{key}",
+     "httpMethod": "GET",
+     "parameters": {
+      "key": {
+       "type": "string",
+       "required": true,
+       "location": "path"
+      }
+     },
+     "parameterOrder": [
+      "key"
+     ],
+     "response": {
+      "$ref": "Score"
+     }
+    },
+    "insert": {
+     "id": "tictactoe.scores.insert",
+     "path": "score",
+     "httpMethod": "POST",
+     "request": {
+      "$ref": "Score"
+     },
+     "response": {
+      "$ref": "Score"
+     }
+    },
+    "list": {
+     "id": "tictactoe.scores.list",
+     "path": "score",
+     "httpMethod": "GET",
+     "response": {
+      "$ref": "ScoreCollection"
+     }
+    }
+   }
+  }
+ }
+}
